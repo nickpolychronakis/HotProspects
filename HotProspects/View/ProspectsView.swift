@@ -53,6 +53,15 @@ struct ProspectsView: View {
                             .font(.headline)
                         Text(prospect.emailAddress)
                             .foregroundColor(.secondary)
+                        if self.filter == .none {
+                            if prospect.isContacted {
+                                Image(systemName: "person.crop.circle.badge.checkmark")
+                                    .foregroundColor(.green)
+                            } else {
+                                Image(systemName:"person.crop.circle.badge.xmark")
+                                    .foregroundColor(.red)
+                            }
+                        }
                     }
                     .contextMenu {
                         Button(prospect.isContacted ? "Mark Uncontacted" : "Mark Contacted") {
