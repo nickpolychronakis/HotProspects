@@ -20,6 +20,7 @@
 		4E70620023A18A4C00086B5C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E7061FE23A18A4C00086B5C /* LaunchScreen.storyboard */; };
 		4E70620B23A18A4C00086B5C /* HotProspectsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E70620A23A18A4C00086B5C /* HotProspectsTests.swift */; };
 		4E70621623A18A4C00086B5C /* HotProspectsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E70621523A18A4C00086B5C /* HotProspectsUITests.swift */; };
+		4EF1FC4023A97FBF00AFAC11 /* ToDo in Resources */ = {isa = PBXBuildFile; fileRef = 4EF1FC3F23A97FBF00AFAC11 /* ToDo */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,8 @@
 		4E70621123A18A4C00086B5C /* HotProspectsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HotProspectsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E70621523A18A4C00086B5C /* HotProspectsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotProspectsUITests.swift; sourceTree = "<group>"; };
 		4E70621723A18A4C00086B5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4EF1FC3F23A97FBF00AFAC11 /* ToDo */ = {isa = PBXFileReference; lastKnownFileType = text; path = ToDo; sourceTree = "<group>"; };
+		4EF1FC4123A980DA00AFAC11 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +130,7 @@
 		4E7061EF23A18A4A00086B5C /* HotProspects */ = {
 			isa = PBXGroup;
 			children = (
+				4EF1FC3F23A97FBF00AFAC11 /* ToDo */,
 				4E7061F023A18A4A00086B5C /* AppDelegate.swift */,
 				4E7061F223A18A4A00086B5C /* SceneDelegate.swift */,
 				4E10C87823A62481001EB1EE /* Model */,
@@ -135,6 +139,7 @@
 				4E7061FE23A18A4C00086B5C /* LaunchScreen.storyboard */,
 				4E70620123A18A4C00086B5C /* Info.plist */,
 				4E7061F423A18A4A00086B5C /* HotProspects.xcdatamodeld */,
+				4EF1FC4123A980DA00AFAC11 /* README.md */,
 				4E7061FB23A18A4C00086B5C /* Preview Content */,
 			);
 			path = HotProspects;
@@ -277,6 +282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E70620023A18A4C00086B5C /* LaunchScreen.storyboard in Resources */,
+				4EF1FC4023A97FBF00AFAC11 /* ToDo in Resources */,
 				4E7061FD23A18A4C00086B5C /* Preview Assets.xcassets in Resources */,
 				4E7061FA23A18A4C00086B5C /* Assets.xcassets in Resources */,
 			);

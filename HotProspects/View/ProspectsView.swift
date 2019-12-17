@@ -14,11 +14,19 @@ enum FilterType {
     case none, contacted, uncontacted
 }
 
+enum SortedType {
+    case name,mostRecent
+}
+
 struct ProspectsView: View {
     
     @EnvironmentObject var prospects: Prospects
     
     let filter: FilterType
+    
+    @State private var sort: SortedType = .mostRecent
+    
+    @State private var showActionSheet = false
     
     var title: String {
         switch filter {
@@ -32,14 +40,24 @@ struct ProspectsView: View {
     }
     
     var filteredProspects: [Prospect] {
+        var filteredProspects = [Prospect]()
         switch filter {
         case .none:
-            return prospects.people
+            filteredProspects =  prospects.people
         case .contacted:
-            return prospects.people.filter { $0.isContacted }
+            filteredProspects = prospects.people.filter { $0.isContacted }
         case .uncontacted:
-            return prospects.people.filter { !$0.isContacted}
+            filteredProspects = prospects.people.filter { !$0.isContacted}
         }
+        
+        var sortedProspects = [Prospect]()
+        switch sort {
+        case .mostRecent:
+            sortedProspects = filteredProspects.sorted { $0.dateAdded > $1.dateAdded }
+        case .name:
+            sortedProspects = filteredProspects.sorted { $0.name < $1.name }
+        }
+        return sortedProspects
     }
     
     @State private var isShowingScanner = false
@@ -76,16 +94,27 @@ struct ProspectsView: View {
                     }
                 }
             }
-                .navigationBarTitle(title)
-                .navigationBarItems(trailing: Button(action: {
-                    self.isShowingScanner = true
-                }) {
-                    Image(systemName: "qrcode.viewfinder")
-                    Text("Scan")
-                })
-                .sheet(isPresented: $isShowingScanner) {
-                    CodeScannerView(codeTypes: [.qr], simulatedData: "Nick Polychronakis\nNickpolychronakis@email.com", completion: self.handleScan)
-                }
+            .navigationBarTitle(title)
+            .navigationBarItems(leading: Button("Sort") {self.showActionSheet = true },
+                                trailing: Button(action: {
+                self.isShowingScanner = true
+            }) {
+                Image(systemName: "qrcode.viewfinder")
+                Text("Scan")
+            })
+            .sheet(isPresented: $isShowingScanner) {
+                CodeScannerView(codeTypes: [.qr], simulatedData: "Anakin\nAnakin@email.com", completion: self.handleScan)
+            }
+            .actionSheet(isPresented: $showActionSheet) { () -> ActionSheet in
+                ActionSheet(title: Text("Sort:"), message: nil, buttons:
+                    [.default(Text("By Name"), action: {
+                        self.sort = .name
+                    }),
+                     .default(Text("By Most Recent"), action: {
+                        self.sort = .mostRecent
+                     })
+                ])
+            }
         }
     }
     
