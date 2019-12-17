@@ -19,15 +19,25 @@ class Prospect: Identifiable, Codable {
 
 
 class Prospects: ObservableObject {
-    static let saveKey = "SavedData"
     @Published private(set) var people: [Prospect]
     
     init() {
-        if let data = UserDefaults.standard.data(forKey: Self.saveKey) {
-            if let decoded = try? JSONDecoder().decode([Prospect].self, from: data) {
+        do {
+            let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+            let fileName = documentDirectory.appendingPathComponent("prospectData")
+            
+            //for debug porpuses, if I want to delete the file
+//            try FileManager.default.removeItem(at: fileName);fatalError()
+            
+            if FileManager.default.fileExists(atPath: fileName.path) {
+                let prospectData = try Data(contentsOf: fileName)
+                let decoded = try JSONDecoder().decode([Prospect].self, from: prospectData)
                 self.people = decoded
                 return
             }
+        } catch {
+            #warning("Change this")
+            fatalError()
         }
         // or else
         self.people = []
@@ -39,8 +49,14 @@ class Prospects: ObservableObject {
     }
     
     private func save() {
-        if let encoded = try? JSONEncoder().encode(people) {
-            UserDefaults.standard.set(encoded, forKey: Self.saveKey)
+        do {
+            let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+            let fileName = documentDirectory.appendingPathComponent("prospectData")
+            let encoded = try JSONEncoder().encode(people)
+            try encoded.write(to: fileName, options: [.atomicWrite,.completeFileProtection])
+        } catch {
+            #warning("Change this")
+            fatalError()
         }
     }
     

@@ -59,7 +59,7 @@ struct ProspectsView: View {
                                     .foregroundColor(.green)
                             } else {
                                 Image(systemName:"person.crop.circle.badge.xmark")
-                                    .foregroundColor(.red)
+                                    .foregroundColor(.gray)
                             }
                         }
                     }
@@ -84,12 +84,13 @@ struct ProspectsView: View {
                     Text("Scan")
                 })
                 .sheet(isPresented: $isShowingScanner) {
-                    CodeScannerView(codeTypes: [.qr], simulatedData: "Nick Polychronakis\nnickpolychronakis@me.com", completion: self.handleScan)
+                    CodeScannerView(codeTypes: [.qr], simulatedData: "Nick Polychronakis\nNickpolychronakis@email.com", completion: self.handleScan)
                 }
         }
     }
     
     func handleScan(result: Result<String, CodeScannerView.ScanError>) {
+        print("QRCode scanned")
         self.isShowingScanner = false
         
         switch result {
@@ -119,10 +120,10 @@ struct ProspectsView: View {
             
             var dateComponents = DateComponents()
             dateComponents.hour = 9
-//            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
             
             // for development
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+//            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
 
             
             let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
