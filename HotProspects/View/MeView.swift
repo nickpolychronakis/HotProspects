@@ -18,13 +18,29 @@ struct MeView: View {
     let filter = CIFilter.qrCodeGenerator()
     
     var body: some View {
-        VStack {
-            TextField("Name", text: $name)
+        let nameWrapped = Binding(
+            get: {
+                self.name
+            }, set: {
+                UserDefaults.standard.set($0, forKey: "UserName")
+                self.name = $0
+            })
+        let emailWrapped = Binding(
+            get: {
+                self.emailAddress
+            }, set: {
+                UserDefaults.standard.set($0, forKey: "UserEmail")
+                self.emailAddress = $0
+            })
+        return VStack {
+            TextField("Name", text: nameWrapped)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
                 .textContentType(.name)
                 .font(.title)
                 .padding(.horizontal)
             
-            TextField("Email address", text: $emailAddress)
+            TextField("Email address", text: emailWrapped)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
                 .textContentType(.emailAddress)
                 .font(.title)
                 .padding([.horizontal,.bottom])
@@ -39,6 +55,10 @@ struct MeView: View {
             Spacer()
         }
         .navigationBarTitle("Your code")
+        .onAppear {
+            self.name = UserDefaults.standard.string(forKey: "UserName") ?? ""
+            self.emailAddress = UserDefaults.standard.string(forKey: "UserEmail") ?? ""
+        }
     }
     
     func generateQRCode(from string: String) -> UIImage {

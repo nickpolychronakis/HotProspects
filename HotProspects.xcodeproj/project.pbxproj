@@ -110,6 +110,7 @@
 		4E7061E423A18A4A00086B5C = {
 			isa = PBXGroup;
 			children = (
+				4EF1FC4123A980DA00AFAC11 /* README.md */,
 				4E7061EF23A18A4A00086B5C /* HotProspects */,
 				4E70620923A18A4C00086B5C /* HotProspectsTests */,
 				4E70621423A18A4C00086B5C /* HotProspectsUITests */,
@@ -139,7 +140,6 @@
 				4E7061FE23A18A4C00086B5C /* LaunchScreen.storyboard */,
 				4E70620123A18A4C00086B5C /* Info.plist */,
 				4E7061F423A18A4A00086B5C /* HotProspects.xcdatamodeld */,
-				4EF1FC4123A980DA00AFAC11 /* README.md */,
 				4E7061FB23A18A4C00086B5C /* Preview Content */,
 			);
 			path = HotProspects;
